@@ -3,6 +3,7 @@ package com.bytestore.composetutorial
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -10,19 +11,26 @@ import androidx.compose.ui.tooling.preview.Preview
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MessageCard(name = "Compose!")
+        setContent { 
+            MessageCard(msg = Message("Android","Jetpack compose!"))
         }
     }
 
+    data class Message(val author:String, val body:String)
+
     @Composable
-    private fun MessageCard(name: String) {
-        Text("Hellow $name")
+    fun MessageCard(msg:Message){
+        Column{
+            Text(text = msg.author)
+            Text(text = msg.body)
+        }
     }
 
     @Preview
     @Composable
-    fun PreviewMessageCard() {
-        MessageCard(name = "Android")
+    fun previewCard(){
+        MessageCard(
+            msg = Message("Collegue","Take a look @ Jetpack compose")
+        )
     }
 }
