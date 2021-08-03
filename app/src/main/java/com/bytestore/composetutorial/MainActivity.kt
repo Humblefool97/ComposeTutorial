@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -19,6 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import java.nio.file.Files.size
+import androidx.compose.foundation.lazy.items
+
 
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
@@ -63,8 +66,15 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
 
-
+    @Composable
+    fun Conversation(messages:List<Message>){
+        LazyColumn {
+            items(messages) { message ->
+                MessageCard(message)
+            }
+        }
     }
 
     @Preview(
@@ -78,9 +88,7 @@ class MainActivity : ComponentActivity() {
     )
 
     @Composable
-    fun previewCard() {
-        MessageCard(
-            msg = Message("Collegue", "Take a look @ Jetpack compose")
-        )
+    fun PreviewCard() {
+        Conversation(messages = SampleData.conversationSample)
     }
 }
