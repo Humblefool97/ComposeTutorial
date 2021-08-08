@@ -26,7 +26,10 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun Playground() {
         MaterialTheme {
-            Counter()
+            Column {
+                Counter()
+                TextField()
+            }
         }
     }
 
@@ -42,7 +45,29 @@ class MainActivity : ComponentActivity() {
         ) {
             Text(
                 "I've been clicked ${count.value} times",
-                fontFamily = FontFamily.Serif)
+                fontFamily = FontFamily.Serif
+            )
+        }
+    }
+
+    @Composable
+    fun TextField() {
+        var name by remember {
+            mutableStateOf("")
+        }
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Hello! $name",
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = MaterialTheme.typography.h5
+            )
+            OutlinedTextField(
+                value = name,
+                onValueChange = {name = it},
+                label = { Text(text = "Name") }
+            )
         }
     }
 
