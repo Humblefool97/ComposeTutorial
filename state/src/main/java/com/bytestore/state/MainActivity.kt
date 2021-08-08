@@ -28,7 +28,15 @@ class MainActivity : ComponentActivity() {
         MaterialTheme {
             Column {
                 Counter()
-                TextField()
+                var name by remember {
+                    mutableStateOf("")
+                }
+                TextField(
+                    name = name,
+                    onNameChange = {
+                        name = it
+                    }
+                )
             }
         }
     }
@@ -51,10 +59,11 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun TextField() {
-        var name by remember {
-            mutableStateOf("")
-        }
+    fun TextField(
+        name:String,
+        onNameChange:(String) ->Unit
+        ) {
+
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
@@ -65,7 +74,7 @@ class MainActivity : ComponentActivity() {
             )
             OutlinedTextField(
                 value = name,
-                onValueChange = {name = it},
+                onValueChange = onNameChange,
                 label = { Text(text = "Name") }
             )
         }

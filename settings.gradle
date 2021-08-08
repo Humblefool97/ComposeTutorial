@@ -9,3 +9,5 @@ dependencyResolutionManagement {
 rootProject.name = "ComposeTutorial"
 include ':app'
 include ':state'
+include ':layouts'
+include ':modifiersadvanced'
